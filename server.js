@@ -1,17 +1,37 @@
 var http = require('http');
-var gRouter = require('./gRouter');
+
+var routes = {
+  '/': (function() {
+    
+  })(),
+
+
+
+};
 
 var server = http.createServer( function( request, response ) {
 
   // grab req and res
   console.log(request.url);
+
   gRouter.getInfoFor( request, response )
+
   response.end( "bam: " + request.url );
 })
 
-gRouter.route("/", function( request, response ){
-  console.log("route bam");
-})
+
+var gRouter = (function(){
+
+  function getInfoFor( request, response ) {
+    console.log(routes['/']);
+  }
+
+  return {
+    getInfoFor: getInfoFor
+
+  }
+})()
+
 
 var PORT = 4567
 server.listen( PORT, function() {
