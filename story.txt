@@ -1,1 +1,1 @@
-hey=yo
+This is a {{ noun }} story that requires a bit of {{ verb }}, not to mention {{ noun }}.
