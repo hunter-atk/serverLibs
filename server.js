@@ -22,7 +22,7 @@ function gRoute( url, req, res) {
   // find the route (a.k.a path) from the routes object
   if ( routes.hasOwnProperty(route) ) {
     getRoute = routes[route];
-    getRoute( url, req, res )
+    getRoute( url, req, res );
   }
 
 }
@@ -31,23 +31,23 @@ function gRoute( url, req, res) {
 var routes = {
 
   root: runRoute(function( url, request, response) {
-    response.end("ROOTER" + url)
+    response.end("ROOTER" + url);
   }),
 
   updatestory: runRoute(function( url, request, response) {
     var query = url.split("?")[1]
 
     if (query) {
-      addMadLib(query)
+      addMadLib(query);
       response.end("adding word to story: " + query)
     } else {
-      response.end("no query sent")
+      response.end("no query sent");
     }
   }),
 
   sendstory: runRoute(function( url, request, response ){
 
-    var filePath = __dirname + "/story.txt"
+    var filePath = __dirname + "/story.txt";
     var stat = fs.statSync(filePath);
 
     fs.readFile(filePath, function (err, data) {
@@ -100,7 +100,7 @@ var routes = {
       });
     });
     req.end();
-  })
+  });
 }
 
 function runRoute( fn ) {
@@ -156,6 +156,7 @@ function addNewWord(currentStory, newWord){
 }
 
 var PORT = process.env.PORT || 4567
+
 server.listen( PORT, function() {
   console.log("listening on on:" + PORT );
-})
+});
