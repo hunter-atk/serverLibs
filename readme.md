@@ -35,9 +35,15 @@ What story will your class write?
   - Respond to other server requests by sending them your updated story.txt
 
 - Routes:
-  - /getstory
-  - /updatestory?(word)
+
+  - /getstory (from a specific node)
+    - use the node HTTP module's request method
+
+  - /updatestory?(your word)
+   - replace the next word in curly braces with your word
+
   - /sendstory
+   - respond to requests made to this route by sending your story.txt
 
 
 ### Story

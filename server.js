@@ -1,6 +1,12 @@
 var http = require('http');
 var fs = require('fs');
 
+// Get the sever host from another student,
+// this is where you will get your story from
+// they should have a sendstory route that sends their updated story
+
+var previousNode = 'serverlibs.herokuapp.com';
+
 var server = http.createServer( function( request, response ) {
 
   var route;
@@ -25,7 +31,23 @@ var server = http.createServer( function( request, response ) {
 var routes = {
 
   root: function( url, request, response) {
-    response.end("ROOTER" + url);
+    var filePath = __dirname + "/index.html";
+    var stat = fs.statSync(filePath);
+
+    fs.readFile(filePath, function (err, data) {
+      if (err) {
+        return console.error(err);
+      }
+
+      // specificy headers in the response
+      response.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': stat.size,
+        'Charset': 'utf-8'
+      });
+
+      response.end(data);
+    });
   },
 
   updatestory: function( url, request, response) {
@@ -49,11 +71,10 @@ var routes = {
         return console.error(err);
       }
 
-      // add custom headers, node will be heroku servers
+      // specificy headers in the response
       response.writeHead(200, {
         'Content-Type': 'text/javascript',
         'Content-Length': stat.size,
-        'Node-List': '{"nodes":[1,2,3,4]}'
       });
 
       response.end(data);
@@ -66,7 +87,7 @@ var routes = {
     var stat = fs.statSync(filePath);
 
     var options = {
-         host: 'serverlibs.herokuapp.com',
+         host: previousNode,
          path: '/sendstory',
       };
 
@@ -90,7 +111,7 @@ var routes = {
            'Content-Length': stat.size
         });
 
-        writeStory(content);
+        saveStory(content);
         response.end(content);
       });
     });
@@ -98,7 +119,8 @@ var routes = {
   }
 }
 
-function writeStory(story){
+// saves a story from a server with the getstory route
+function saveStory(story){
   fs.writeFile('story.txt', story,  function(err) {
     if (err) {
        return console.error(err);
@@ -107,17 +129,7 @@ function writeStory(story){
   });
 }
 
-function readMadLib(queryWord){
-  fs.readFile('story.txt', function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("Reading story.txt" + data.toString());
-    story = data.toString();
-    // addMadLib(queryWord, story)
-  });
-}
-
+// used in the updatestory route
 function addMadLib(queryWord) {
   // get the current story
   var story;
@@ -134,6 +146,7 @@ function addMadLib(queryWord) {
   });
 }
 
+// Used in addMadLib to add a new work from the string query to the story.txt
 function addNewWord(currentStory, newWord){
   var placeholderText = /({{.*?}})/
   updatedStory = currentStory.replace(placeholderText, newWord)
