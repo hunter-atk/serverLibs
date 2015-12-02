@@ -27,7 +27,14 @@ What story will your class write?
 
 ## What to do next
 
+- Get the server of the person you plan to send your story to.
+
 - Write the neccessary code to:
   - Send a request to a server to receive a story.txt
   - Update a story by replacing the next placeholder in the story.txt
   - Respond to other server requests by sending them your updated story.txt
+
+- Routes:
+  - /getstory
+  - /updatestory?(word)
+  - /sendstory
