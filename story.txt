@@ -1,1 +1,1 @@
-This is a wahwah story that requires a bit of {{ verb }}, not to mention {{ noun }}.
+This is a {{ verb }} story that does not {{ noun }} care about {{ noun }}

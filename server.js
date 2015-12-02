@@ -4,18 +4,19 @@ var fs = require('fs');
 var server = http.createServer( function( request, response ) {
 
   var route;
-  var getRoute;
+  var url  = request.url;
+
   // check if the url has no path
   // If there is one, then grab the path, and ignore any query strings
-  if (request.url === "/") {
+  if (url === "/") {
     route = "root"
   } else {
-    route = request.url.split("?")[0].slice(1,url.length);
+    route = url.split("?")[0].slice(1,url.length);
   }
 
   // find the route (a.k.a path) from the routes object
   if ( routes.hasOwnProperty(route) ) {
-    routes[route]( request.url , request, response );
+    routes[route]( url , request, response );
   }
 
 })
@@ -82,7 +83,7 @@ var routes = {
       // once the response stream is finished
       res.on('end', function() {
       // Data received completely.
-        console.log("Received story: ", body);
+        console.log("Received story: ", content);
 
         response.writeHead(200, {
            'Content-Type': 'text/javascript',

@@ -38,3 +38,7 @@ What story will your class write?
   - /getstory
   - /updatestory?(word)
   - /sendstory
+
+
+### Story
+ - This is a {{ verb }} story that does not {{ noun }} care about {{ noun }}
