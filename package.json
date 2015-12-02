@@ -1,0 +1,20 @@
+{
+  "name": "server-libs",
+  "version": "1.0.0",
+  "description": "This is a server mad libs game to be played in the classroom.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gSchool/server-libs.git"
+  },
+  "author": "Zubair Desai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gSchool/server-libs/issues"
+  },
+  "homepage": "https://github.com/gSchool/server-libs#readme"
+}
