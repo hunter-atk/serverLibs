@@ -15,8 +15,7 @@ var server = http.createServer( function( request, response ) {
 
   // find the route (a.k.a path) from the routes object
   if ( routes.hasOwnProperty(route) ) {
-    getRoute = routes[route];
-    getRoute( request.url , request, response );
+    routes[route]( request.url , request, response );
   }
 
 })
