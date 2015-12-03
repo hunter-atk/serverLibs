@@ -115,6 +115,7 @@ var routes = {
         response.end(content);
       });
     });
+
     req.end();
   }
 }
@@ -138,7 +139,7 @@ function addMadLib(queryWord) {
     if (err) {
       return console.log(err);
     }
-    console.log("Reading story.txt" + data.toString());
+    console.log("Reading story.txt:\n" + data.toString());
     story = data.toString();
 
     // update story with new word
