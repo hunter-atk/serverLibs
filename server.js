@@ -1,3 +1,4 @@
+// Do not import any other modules. 
 var http = require('http');
 var fs = require('fs');
 
@@ -5,27 +6,23 @@ var fs = require('fs');
 // this is where you will get your story from
 // they should have a sendstory route that sends their updated story
 
+// A working solution exists at this url
+// Once you are ready to test with a partner, replace this url
+// with your partners URL. The story at this default is very basic. 
 var previousNode = 'serverlibs.herokuapp.com';
 
 var server = http.createServer( function( request, response ) {
-
-  var route;
-  var url  = request.url;
+  // Every request to your server starts here.  
 
   // check if the url has no path
   // If there is one, then grab the path, and ignore any query strings
-  if (url === "/") {
-    route = "root"
+  if (request.url === "/") {
+    routes['root'](request.url, request, response);
   } else {
-    route = url.split("?")[0].slice(1,url.length);
+    // Here, parse the request url to get the route
+    // then call the appropriate function.
   }
-
-  // find the route (a.k.a path) from the routes object
-  if ( routes.hasOwnProperty(route) ) {
-    routes[route]( url , request, response );
-  }
-
-})
+});
 
 // the routes object contains each route as a key.
 var routes = {
