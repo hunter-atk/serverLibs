@@ -1,4 +1,4 @@
-# Server Mad Libs
+# server-libs
 
 This is a server mad libs game to be played in the classroom.
 
