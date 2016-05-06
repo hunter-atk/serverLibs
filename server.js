@@ -1,7 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 
-// Get the sever host from another student,
+// Get the server host from another student,
 // this is where you will get your story from
 // they should have a sendstory route that sends their updated story
 
