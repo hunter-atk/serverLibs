@@ -46,5 +46,5 @@ What story will your class write?
    - respond to requests made to this route by sending your story.txt
 
 
-### Story
+### Story (Instructors: You can place your own template here)
  - This is a {{ verb }} story that does not {{ noun }} care about {{ noun }}
