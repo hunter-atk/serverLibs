@@ -9,7 +9,7 @@ var fs = require('fs');
 // A working solution exists at this url
 // Once you are ready to test with a partner, replace this url
 // with your partners URL. The story at this default is very basic.
-var previousNode = 'yo-yo-libs.herokuapp.com';
+var previousNode = 'https://server-libs-g80.herokuapp.com/';
 
 var server = http.createServer( function( request, response ) {
   // Every request to your server starts here.
@@ -129,7 +129,8 @@ var routes = {
 
     // var filePath = __dirname + "/story.txt"
     // var stat = fs.statSync(filePath);
-    var thisUrl = 'http://'+ previousNode +'/sendstory';
+    // var thisUrl = 'http://'+ previousNode +'/sendstory';
+    var thisUrl = 'https://server-libs-g80.herokuapp.com/';
     http.get(thisUrl, (resp) => {
        let data = '';
 
