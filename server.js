@@ -106,7 +106,7 @@ var routes = {
 
     // var filePath = __dirname + "/story.txt"
     // var stat = fs.statSync(filePath);
-    var thisUrl = 'http://'+ previousNode +"/story.txt";
+    var thisUrl = 'http://'+ previousNode +'/sendstory';
     http.get(thisUrl, (resp) => {
        let data = '';
 
