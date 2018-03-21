@@ -79,7 +79,7 @@ var routes = {
         //data = theLib;
         fs.writeFile("./story.txt", theLib, err=>{
           if (err){
-            throw err;
+            console.log(error);
           } else {
             response.end(theLib);
           }
@@ -142,7 +142,7 @@ var routes = {
        resp.on('end', () => {
          fs.writeFile('./story.txt', data, err=>{
            if (err){
-             throw err;
+             console.log(error);
            } else {
              response.end('Data saved to file');
            }
