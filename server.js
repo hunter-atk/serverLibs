@@ -9,7 +9,7 @@ var fs = require('fs');
 // A working solution exists at this url
 // Once you are ready to test with a partner, replace this url
 // with your partners URL. The story at this default is very basic.
-var previousNode = 'https://fast-hollows-88598.herokuapp.com/';
+var previousNode = 'fast-hollows-88598.herokuapp.com/';
 
 var server = http.createServer( function( request, response ) {
   // Every request to your server starts here.
@@ -19,9 +19,13 @@ var server = http.createServer( function( request, response ) {
   if (request.url === "/") {
     routes['root'](request.url, request, response);
   } else {
-    // Here, parse the request url to get the route
-    // then call the appropriate function.
-
+    console.log("WORKS");
+    let route = request.url.slice(1).split('?')[0];
+    if (Object.keys(routes).includes(route)){
+      routes[route](request.url, request, response);
+    } else {
+      response.end('no, fuck off');
+    }
   }
 });
 
@@ -72,10 +76,24 @@ var routes = {
     the request.
   */
   sendstory: function( url, request, response ){
-    // read the story
 
-    // send the story
-  },
+   var filePath = __dirname + "/story.txt";
+   var stat = fs.statSync(filePath);
+
+   fs.readFile(filePath, function (err, data) {
+     if (err) {
+       return console.error(err);
+     }
+
+     // specificy headers in the response
+     response.writeHead(200, {
+       'Content-Type': 'text/javascript',
+       'Content-Length': stat.size,
+     });
+
+     response.end(data);
+   });
+ },
 
   /**
     Fetch the story from your partners server by making
@@ -88,13 +106,33 @@ var routes = {
 
     // var filePath = __dirname + "/story.txt"
     // var stat = fs.statSync(filePath);
+    var thisUrl = 'http://'+ previousNode +"/story.txt";
+    http.get(thisUrl, (resp) => {
+       let data = '';
 
+       // A chunk of data has been recieved.
+       resp.on('data', (chunk) => {
+          data += chunk;
+       });
+
+       resp.on('end', () => {
+         fs.writeFile('./story.txt', data, err=>{
+           if (err){
+             throw err;
+           } else {
+             response.end('Data saved to file');
+           }
+         })
+
+       });
+    })
     // Make an HTTP request to your partners server
       // When that HTTP request has been processed, and
       // you have the data, save that data into your story.txt
       // file.
 
       // Don't forget to end the request.
+
   }
 };
 
