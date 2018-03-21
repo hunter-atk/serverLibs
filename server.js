@@ -9,7 +9,7 @@ var fs = require('fs');
 // A working solution exists at this url
 // Once you are ready to test with a partner, replace this url
 // with your partners URL. The story at this default is very basic.
-var previousNode = 'fast-hollows-88598.herokuapp.com/';
+var previousNode = 'yo-yo-libs.herokuapp.com';
 
 var server = http.createServer( function( request, response ) {
   // Every request to your server starts here.
