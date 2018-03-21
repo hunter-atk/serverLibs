@@ -1,1 +1,1 @@
-FUCK YOUUUUU
+This is a {{ adjective }} story that does not {{ noun }} care about {{ noun }}.

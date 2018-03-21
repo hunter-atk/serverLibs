@@ -60,8 +60,21 @@ var routes = {
   */
   updatestory: function( url, request, response) {
     // Fetch the passed in word from the url query parameters
+    var word = url.slice(1).split('?')[1];
 
     // get the story file
+    fs.readFile(filePath, 'UTF8', function (err, data) {
+      if (err){
+        return console.log(error);
+      } else {
+        let theLib = data.split(" ");
+        let firstBrackIndex = theLib.indexOf('{{');
+        theLib[firstBrackIndex + 1] = word;
+        theLib.splice(firstBrackIndex + 2, 1);
+        theLib.splice(firstBrackIndex, 1);
+        response.end(theLib.join(" "));
+      }
+    });
 
     // save the word into the first available placeholder
     // those are {{ verb }}, {{ noun }} or {{ adjective }}
@@ -77,8 +90,8 @@ var routes = {
   */
   sendstory: function( url, request, response ){
 
-   var filePath = __dirname + "/story.txt";
-   var stat = fs.statSync(filePath);
+   let filePath = __dirname + "/story.txt";
+   let stat = fs.statSync(filePath);
 
    fs.readFile(filePath, function (err, data) {
      if (err) {
