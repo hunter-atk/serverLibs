@@ -24,7 +24,7 @@ var server = http.createServer( function( request, response ) {
     if (Object.keys(routes).includes(route)){
       routes[route](request.url, request, response);
     } else {
-      response.end('no, fuck off');
+      response.write(route);
     }
   }
 });
