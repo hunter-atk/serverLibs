@@ -1,1 +1,1 @@
-This is a {{ verb }} story that does not {{ noun }} care about {{ noun }}.
+ that does not

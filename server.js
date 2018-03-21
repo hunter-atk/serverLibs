@@ -74,6 +74,9 @@ var routes = {
         theLib[firstBrackIndex + 1] = word;
         theLib.splice(firstBrackIndex + 2, 1);
         theLib.splice(firstBrackIndex, 1);
+        if (firstBrackIndex < 1){
+          return "fuck off";
+        }
         theLib = theLib.join(" ");
         response.end(theLib);
         //data = theLib;
