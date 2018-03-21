@@ -60,6 +60,8 @@ var routes = {
   */
   updatestory: function( url, request, response) {
     // Fetch the passed in word from the url query parameters
+    let filePath = __dirname + "/story.txt";
+    let stat = fs.statSync(filePath);
     var word = url.slice(1).split('?')[1];
 
     // get the story file
@@ -72,7 +74,16 @@ var routes = {
         theLib[firstBrackIndex + 1] = word;
         theLib.splice(firstBrackIndex + 2, 1);
         theLib.splice(firstBrackIndex, 1);
-        response.end(theLib.join(" "));
+        theLib = theLib.join(" ");
+        response.end(theLib);
+        //data = theLib;
+        fs.writeFile("./story.txt", theLib, err=>{
+          if (err){
+            throw err;
+          } else {
+            response.end(theLib);
+          }
+        })
       }
     });
 
@@ -80,7 +91,6 @@ var routes = {
     // those are {{ verb }}, {{ noun }} or {{ adjective }}
 
     // save the story file
-
     // send the updated version of the story to the browser
   },
 
