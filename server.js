@@ -9,7 +9,7 @@ var fs = require('fs');
 // A working solution exists at this url
 // Once you are ready to test with a partner, replace this url
 // with your partners URL. The story at this default is very basic.
-var previousNode = 'https://fast-hollows-88598.herokuapp.com/';
+var previousNode = 'server-libs-g80.herokuapp.com';
 
 var server = http.createServer( function( request, response ) {
   // Every request to your server starts here.
@@ -126,7 +126,7 @@ var routes = {
     your own story.txt file with this data.
   */
   getstory: function( url, request, response ){
-
+    console.log('a');
     // var filePath = __dirname + "/story.txt"
     // var stat = fs.statSync(filePath);
     var thisUrl = 'http://'+ previousNode +'/sendstory';
@@ -134,10 +134,12 @@ var routes = {
        let data = '';
 
        // A chunk of data has been recieved.
+       console.log('b');
+
        resp.on('data', (chunk) => {
           data += chunk;
        });
-
+       console.log('c');
        resp.on('end', () => {
          fs.writeFile('./story.txt', data, err=>{
            if (err){
@@ -146,7 +148,7 @@ var routes = {
              response.end('Data saved to file');
            }
          })
-
+         console.log('d');
        });
     })
     // Make an HTTP request to your partners server
